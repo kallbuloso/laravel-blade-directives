@@ -189,7 +189,11 @@ return [
             return "<script>\n".$include.'</script>';
         }
     },
-
+    
+    'activeIfRoute' => function ($expression) {
+        return "<?php echo strpos(request()->route()->getName(), {$expression}) === 0 ? 'active' : ''; ?>";
+    },
+    
     /*
     |---------------------------------------------------------------------
     | @routeis
