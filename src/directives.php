@@ -196,6 +196,19 @@ return [
     
     /*
     |---------------------------------------------------------------------
+    | @activeIfUrl('UrlName','active')
+    | @activeIfUrl('UrlName','open')
+    |---------------------------------------------------------------------
+    */
+   'activeIfUrl' => function ($expression) {
+    list($url, $class) = explode(',',str_replace(['(',')',' '], '', $expression));
+
+    $activeUrl = "<?php echo e(request()->is({$url}) ? $class : ''); ?>";
+    return $activeUrl;
+    },
+    
+    /*
+    |---------------------------------------------------------------------
     | @routeis
     |---------------------------------------------------------------------
     */
@@ -443,18 +456,6 @@ return [
         return "<?php echo route($expression); ?>";    
     },
 
-    /*
-    |---------------------------------------------------------------------
-    | @activeIfUrl('UrlName','active')
-    | @activeIfUrl('UrlName','open')
-    |---------------------------------------------------------------------
-    */
-    'activeIfUrl' => function ($expression) {
-        list($url, $class) = explode(',',str_replace(['(',')',' '], '', $expression));
-
-        $activeUrl = "<?php echo e(request()->is({$url}) ? $class : ''); ?>";
-        return $activeUrl;
-    },
 
     /*
     |---------------------------------------------------------------------
